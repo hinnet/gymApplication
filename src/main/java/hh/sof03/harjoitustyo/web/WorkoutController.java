@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 
 import hh.sof03.harjoitustyo.domain.Workout;
 import hh.sof03.harjoitustyo.domain.WorkoutRepository;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,12 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class WorkoutController {
     @Autowired
-    private WorkoutRepository repository;
+    private WorkoutRepository wRepository;
 
     // Request list of all workouts and return html to web browser
     @GetMapping("/workoutlist")
     public String workoutList(Model model) {
-        model.addAttribute("workouts", repository.findAll());
+        model.addAttribute("workouts", wRepository.findAll());
         return "workoutlist";
     }
 
@@ -32,19 +33,19 @@ public class WorkoutController {
     
     @PostMapping("/save-workout")
     public String saveWorkout(Workout workout) {
-        repository.save(workout);
+        wRepository.save(workout);
         return "redirect:/workoutlist";
     }
 
     @GetMapping("/delete-workout/{id}")
     public String deleteWorkout(@PathVariable("id") Long workoutId, Model model) {
-        repository.deleteById(workoutId);
+    wRepository.deleteById(workoutId);
         return "redirect:/workoutlist";
     }
 
     @GetMapping("/edit-workout/{id}")
     public String editWorkout(@PathVariable("id") Long workoutId, Model model) {
-        model.addAttribute("workout", repository.findById(workoutId));
+        model.addAttribute("workout", wRepository.findById(workoutId));
         return "edit-workout";
     }
 }

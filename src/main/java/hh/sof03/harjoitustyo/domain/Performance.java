@@ -14,9 +14,11 @@ public class Performance {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private double weights;
+    private String exercise;
+    private double weight;
     private int sets;
     private int reps;
+    private int rest;
 
     @ManyToOne
     @JsonIgnoreProperties ("performances")
@@ -26,11 +28,13 @@ public class Performance {
     public Performance() {
     }
 
-    public Performance(double weights, int sets, int reps, Workout workout) {
+    public Performance(String exercise, double weight, int sets, int reps, int rest, Workout workout) {
         super();
-        this.weights = weights;
+        this.exercise = exercise;
+        this.weight = weight;
         this.sets = sets;
         this.reps = reps;
+        this.rest = rest;
         this.workout = workout;
     }
 
@@ -42,12 +46,20 @@ public class Performance {
         this.id = id;
     }
 
+    public String getExercise() {
+        return exercise;
+    }
+
+    public void setExercise(String exercise) {
+        this.exercise = exercise;
+    }
+
     public double getWeights() {
-        return weights;
+        return weight;
     }
 
     public void setWeights(double weights) {
-        this.weights = weights;
+        this.weight = weights;
     }
 
     public int getSets() {
@@ -66,6 +78,14 @@ public class Performance {
         this.reps = reps;
     }
 
+    public int getRest() {
+        return rest;
+    }
+
+    public void setRest(int rest) {
+        this.rest = rest;
+    }
+
     public Workout getWorkout() {
         return workout;
     }
@@ -77,8 +97,8 @@ public class Performance {
     @Override
     public String toString() {
         if (this.workout != null)
-            return "Performance [id=" + id + ", weights=" + weights + ", sets=" + sets + ", reps=" + reps + ", workout =" + this.getWorkout() + "]";
+            return "Performance [id=" + id + ", weights=" + weight + ", sets=" + sets + ", reps=" + reps + ", workout =" + this.getWorkout() + "]";
         else
-            return "Performance [id=" + id + ", weights=" + weights + ", sets=" + sets + ", reps=" + reps + "]";
+            return "Performance [id=" + id + ", weights=" + weight + ", sets=" + sets + ", reps=" + reps + "]";
     }
 }
