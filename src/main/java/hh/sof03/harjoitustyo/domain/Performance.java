@@ -15,7 +15,7 @@ public class Performance {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String exercise;
-    private double weight;
+    private double weights;
     private int sets;
     private int reps;
     private int rest;
@@ -28,10 +28,10 @@ public class Performance {
     public Performance() {
     }
 
-    public Performance(String exercise, double weight, int sets, int reps, int rest, Workout workout) {
+    public Performance(String exercise, double weights, int sets, int reps, int rest, Workout workout) {
         super();
         this.exercise = exercise;
-        this.weight = weight;
+        this.weights = weights;
         this.sets = sets;
         this.reps = reps;
         this.rest = rest;
@@ -54,12 +54,12 @@ public class Performance {
         this.exercise = exercise;
     }
 
-    public double getWeights() {
-        return weight;
+    public double getweights() {
+        return weights;
     }
 
-    public void setWeights(double weights) {
-        this.weight = weights;
+    public void set(double weights) {
+        this.weights = weights;
     }
 
     public int getSets() {
@@ -97,8 +97,8 @@ public class Performance {
     @Override
     public String toString() {
         if (this.workout != null)
-            return "Performance [id=" + id + ", weights=" + weight + ", sets=" + sets + ", reps=" + reps + ", workout =" + this.getWorkout() + "]";
+            return "Performance [id=" + id + ", weights=" + weights + ", sets=" + sets + ", reps=" + reps + ", workout =" + this.getWorkout() + "]";
         else
-            return "Performance [id=" + id + ", weights=" + weight + ", sets=" + sets + ", reps=" + reps + "]";
+            return "Performance [id=" + id + ", weights=" + weights + ", sets=" + sets + ", reps=" + reps + "]";
     }
 }

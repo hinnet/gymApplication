@@ -34,9 +34,11 @@ public class Workout {
     public Workout() {
     }
 
-    public Workout(String title, User user) {
+    public Workout(String title, User user, List<Performance> performances) {
         super();
         this.title = title;
+        this.user = user;
+        this.performances = performances;
     }
 
     public Long getId() {

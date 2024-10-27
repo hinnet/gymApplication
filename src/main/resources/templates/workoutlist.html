@@ -8,14 +8,31 @@
 <body>
     <div>
         <table class="table table-striped">
-            <tr>
-                <th>Title</th>
-            </tr>
-                <tr th:each = "workout : ${workouts}">
-                <td th:text="${workout.title}"></td>
-            </tr>
-            <td><a th:href="@{/delete-workout/{id}(id=${workout.id})}" class="btn btn-xs btn-danger">Delete</a></td>
-            <td><a th:href="@{/edit-workout/{id}(id=${workout.id})}" class="btn btn-alt">Edit</a></td>
+            <thead>
+                <tr>
+                    <th>Workout title</th>
+                    <th>Exercise</th>
+                    <!-- <th>Weights used</th> -->
+                    <th>Sets</th>
+                    <th>Reps</th>
+                    <th>Rest inbetween sets (s)</th>
+                </tr>
+            </thead>
+            <tbody th:each = "workout : ${workouts}">
+                <tr>
+                    <td th:text="${workout.title}" rowspan="${#lists.size(workout.performances) : 1}"></td>
+                    <td><a th:href="@{/delete-workout/{id}(id=${workout.id})}" class="btn btn-xs btn-danger">Delete</a></td>
+                    <td><a th:href="@{/edit-workout/{id}(id=${workout.id})}" class="btn btn-alt">Edit</a></td>
+                </tr>
+                <tr th:each="performance : ${workout.performances}">
+                    <td></td>
+                    <td th:text="${performance.exercise}"></td>
+                    <!-- <td th:text="${performance.weights}"></td> -->
+                    <td th:text="${performance.sets}"></td>
+                    <td th:text="${performance.reps}"></td>
+                    <td th:text="${performance.rest}"></td>
+                </tr>
+            </tbody>
         </table>
         <a href="/new-workout" class="btn btn-primary">Add new Workout</a>
     </div>

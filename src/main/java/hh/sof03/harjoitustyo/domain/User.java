@@ -10,28 +10,42 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "app_user")
 public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String username;
-    // TODO: password
+    private String password;
     // TODO: role
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonIgnoreProperties("user")  
     private List<Workout> workouts;
 
+    
+
+    public User(String username, String password, List<Workout> workouts) {
+        super();
+        this.username = username;
+        this.password = password;
+        this.workouts = workouts;
+    }
+
     public User() {
     }
 
-    public User(String username) {
-        super();
-        this.username = username;
+    public String getPassword() {
+        return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     public Long getId() {
         return id;
     }

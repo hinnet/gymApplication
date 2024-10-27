@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Bean;
 
 import hh.sof03.harjoitustyo.domain.Performance;
 import hh.sof03.harjoitustyo.domain.PerformanceRepository;
+import hh.sof03.harjoitustyo.domain.User;
+import hh.sof03.harjoitustyo.domain.UserRepository;
 import hh.sof03.harjoitustyo.domain.Workout;
 import hh.sof03.harjoitustyo.domain.WorkoutRepository;
 
@@ -24,12 +26,16 @@ public class HarjoitustyoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(WorkoutRepository wRepository, PerformanceRepository pRepository) {
+	public CommandLineRunner demo(UserRepository uRepository, WorkoutRepository wRepository, PerformanceRepository pRepository) {
 		return (args) -> {
-			Workout workout1 = new Workout("Upper - Workout 1", null);
-			Workout workout2 = new Workout("Lower - Workout 1", null);
-			Workout workout3 = new Workout("Upper - Workout 2", null);
-			Workout workout4 = new Workout("Lower - Workout 2", null);
+			User user = new User("testUser", "null", null);
+
+			uRepository.save(user);
+
+			Workout workout1 = new Workout("Upper - Workout 1", user, null);
+			Workout workout2 = new Workout("Lower - Workout 1", user, null);
+			Workout workout3 = new Workout("Upper - Workout 2", user, null);
+			Workout workout4 = new Workout("Lower - Workout 2", user, null);
 
 			wRepository.save(workout1);
 			wRepository.save(workout2);
