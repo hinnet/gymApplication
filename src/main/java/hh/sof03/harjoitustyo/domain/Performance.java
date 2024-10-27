@@ -21,7 +21,7 @@ public class Performance {
     private int rest;
 
     @ManyToOne
-    @JsonIgnoreProperties ("performances")
+    @JsonIgnoreProperties("performances")
     @JoinColumn(name = "workoutid")
     private Workout workout;
 

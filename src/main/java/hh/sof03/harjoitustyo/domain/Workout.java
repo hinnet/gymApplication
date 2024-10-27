@@ -23,6 +23,7 @@ public class Workout {
     // TODO: kokonaispainot (workout load)?
 
     @ManyToOne
+    @JsonIgnoreProperties("workouts")
     @JoinColumn(name = "userid")
     private User user;
 
@@ -62,9 +63,16 @@ public class Workout {
         this.performances = performances;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Workout [id=" + id + ", title=" + title + "]";
     }
-
 }

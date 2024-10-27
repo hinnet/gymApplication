@@ -24,25 +24,28 @@ public class WorkoutController {
         return "workoutlist";
     }
 
-    // Add new workout, return new-workout form
+    // Add new workout, returns new-workout form
     @GetMapping("/new-workout")
     public String addWorkout(Model model) {
         model.addAttribute("workout", new Workout());
         return "new-workout";
     }
     
+    // Save new workout to database
     @PostMapping("/save-workout")
     public String saveWorkout(Workout workout) {
         wRepository.save(workout);
         return "redirect:/workoutlist";
     }
 
+    // Delete workout from database
     @GetMapping("/delete-workout/{id}")
     public String deleteWorkout(@PathVariable("id") Long workoutId, Model model) {
     wRepository.deleteById(workoutId);
         return "redirect:/workoutlist";
     }
 
+    // Edit workout
     @GetMapping("/edit-workout/{id}")
     public String editWorkout(@PathVariable("id") Long workoutId, Model model) {
         model.addAttribute("workout", wRepository.findById(workoutId));
