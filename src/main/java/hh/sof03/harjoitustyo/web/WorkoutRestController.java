@@ -7,11 +7,13 @@ import org.springframework.stereotype.Controller;
 
 import hh.sof03.harjoitustyo.domain.Workout;
 import hh.sof03.harjoitustyo.domain.WorkoutRepository;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
+@CrossOrigin
 @Controller
 public class WorkoutRestController {
-
     @Autowired
     private WorkoutRepository repository;
 
