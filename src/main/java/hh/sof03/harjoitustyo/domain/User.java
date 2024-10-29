@@ -23,10 +23,8 @@ public class User {
     // TODO: role
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    @JsonIgnoreProperties("user")  
+    @JsonIgnoreProperties("user")
     private List<Workout> workouts;
-
-    
 
     public User(String username, String password, List<Workout> workouts) {
         super();

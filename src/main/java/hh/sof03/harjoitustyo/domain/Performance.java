@@ -15,10 +15,10 @@ public class Performance {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String exercise;
-    private double weights;
-    private int sets;
-    private int reps;
-    private int rest;
+    private Double weights;
+    private Integer sets;
+    private Integer reps;
+    private Integer rest;
 
     @ManyToOne
     @JsonIgnoreProperties("performances")
