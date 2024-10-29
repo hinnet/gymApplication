@@ -55,6 +55,7 @@ public class WorkoutController {
     @GetMapping("/edit-workout/{id}")
     public String editWorkout(@PathVariable("id") Long workoutId, Model model) {
         model.addAttribute("workout", wRepository.findById(workoutId));
+        // model.addAttribute("performance", pRepository.findById(performanceId));
         return "edit-workout";
     }
 }

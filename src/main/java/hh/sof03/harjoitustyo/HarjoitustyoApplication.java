@@ -47,7 +47,7 @@ public class HarjoitustyoApplication {
 			});
 
 			Performance performance1 = new Performance("Bench Press", 80.5, 4, 5, 180, workout1);
-			Performance performance2 = new Performance("Overhead Press", 50, 3, 5, 120, workout1);
+			Performance performance2 = new Performance("Overhead Press", 50.0, 3, 5, 120, workout1);
 			Performance performance3 = new Performance("Lateral Raise", 20, 3, 10, 80, workout1);
 			Performance performance4 = new Performance("Cable Crunch", 100, 3, 10, 80, workout1);
 

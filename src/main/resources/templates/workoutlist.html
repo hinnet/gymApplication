@@ -12,7 +12,7 @@
                 <tr>
                     <th>Workout title</th>
                     <th>Exercise</th>
-                    <!-- <th>Weights used</th> -->
+                    <th>Weights used</th>
                     <th>Sets</th>
                     <th>Reps</th>
                     <th>Rest inbetween sets (s)</th>
@@ -27,7 +27,7 @@
                 <tr th:each="performance : ${workout.performances}">
                     <td></td>
                     <td th:text="${performance.exercise}"></td>
-                    <!-- <td th:text="${performance.weights}"></td> -->
+                    <td th:text="${performance.weights}"></td>
                     <td th:text="${performance.sets}"></td>
                     <td th:text="${performance.reps}"></td>
                     <td th:text="${performance.rest}"></td>

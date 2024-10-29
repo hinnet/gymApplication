@@ -15,7 +15,7 @@ public class Performance {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String exercise;
-    private Double weights;
+    private double weights;
     private Integer sets;
     private Integer reps;
     private Integer rest;
@@ -28,7 +28,7 @@ public class Performance {
     public Performance() {
     }
 
-    public Performance(String exercise, double weights, int sets, int reps, int rest, Workout workout) {
+    public Performance(String exercise, double weights, Integer sets, Integer reps, Integer rest, Workout workout) {
         super();
         this.exercise = exercise;
         this.weights = weights;
@@ -54,51 +54,45 @@ public class Performance {
         this.exercise = exercise;
     }
 
-    public double getweights() {
+    public double getWeights() {
         return weights;
     }
 
-    public void set(double weights) {
+    public void setWeights(double weights) {
         this.weights = weights;
     }
 
-    public int getSets() {
+    public Integer getSets() {
         return sets;
     }
 
-    public void setSets(int sets) {
+    public void setSets(Integer sets) {
         this.sets = sets;
     }
 
-    public int getReps() {
+    public Integer getReps() {
         return reps;
     }
 
-    public void setReps(int reps) {
+    public void setReps(Integer reps) {
         this.reps = reps;
     }
 
-    public int getRest() {
+    public Integer getRest() {
         return rest;
     }
 
-    public void setRest(int rest) {
+    public void setRest(Integer rest) {
         this.rest = rest;
     }
 
     public Workout getWorkout() {
         return workout;
     }
-    
+
     public void setWorkout(Workout workout) {
         this.workout = workout;
     }
 
-    @Override
-    public String toString() {
-        if (this.workout != null)
-            return "Performance [id=" + id + ", weights=" + weights + ", sets=" + sets + ", reps=" + reps + ", workout =" + this.getWorkout() + "]";
-        else
-            return "Performance [id=" + id + ", weights=" + weights + ", sets=" + sets + ", reps=" + reps + "]";
-    }
+    
 }
