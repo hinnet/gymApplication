@@ -13,18 +13,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 @Controller
 public class WorkoutController {
     @Autowired
-    private WorkoutRepository wRepository;
+    private WorkoutRepository woRepository;
 
     @Autowired
-    private PerformanceRepository pRepository;
+    private PerformanceRepository perfRepository;
 
     // Request list of all workouts and return html to web browser
     @GetMapping("/workoutlist")
     public String workoutList(Model model) {
-        model.addAttribute("workouts", wRepository.findAll());
+        model.addAttribute("workouts", woRepository.findAll());
         return "workoutlist";
     }
 
@@ -39,23 +40,30 @@ public class WorkoutController {
     // Save new workout to database
     @PostMapping("/save-workout")
     public String saveWorkout(Workout workout, Performance performance) {
-        wRepository.save(workout);
-        pRepository.save(performance);
-        return "redirect:/workoutlist";
-    }
-
-    // Delete workout from database
-    @GetMapping("/delete-workout/{id}")
-    public String deleteWorkout(@PathVariable("id") Long workoutId, Model model) {
-    wRepository.deleteById(workoutId);
+        woRepository.save(workout);
+        perfRepository.save(performance);
         return "redirect:/workoutlist";
     }
 
     // Edit workout
     @GetMapping("/edit-workout/{id}")
     public String editWorkout(@PathVariable("id") Long workoutId, Model model) {
-        model.addAttribute("workout", wRepository.findById(workoutId));
-        // model.addAttribute("performance", pRepository.findById(performanceId));
+        model.addAttribute("workout", woRepository.findById(workoutId));
+        model.addAttribute("performances", woRepository.findById(workoutId));
         return "edit-workout";
+    }
+
+    // Update workout
+    @PostMapping("/update-workout")
+    public String updateWorkout(Workout workout) {
+        woRepository.save(workout);
+        return "redirect:/workoutlist";
+    }
+
+    // Delete workout from database
+    @GetMapping("/delete-workout/{id}")
+    public String deleteWorkout(@PathVariable("id") Long workoutId, Model model) {
+    woRepository.deleteById(workoutId);
+        return "redirect:/workoutlist";
     }
 }

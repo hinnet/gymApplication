@@ -14,6 +14,7 @@ public class Performance {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+
     private String exercise;
     private double weights;
     private Integer sets;

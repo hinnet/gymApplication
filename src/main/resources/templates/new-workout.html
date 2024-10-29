@@ -9,24 +9,7 @@
     <div>
         <form th:object="${workout}" th:action="@{/save-workout}" action="#" method="post">
             <label for="title">Workout Title</label>
-            <input type="text" id="title" th:field="*{title}" />
-
-            <input type="submit" value="Add Exercise" />
-
-        <!--<label for="exercise">Exercise</label>
-            <input type="text" id="exercise" th:field="*{performances[0].exercise}" />
-
-            <label for="weights">Weights used</label>
-            <input type="text" id="weights" th:field="*{performance[0].weights}" />
-
-            <label for="sets">Sets</label>
-            <input type="text" id="sets" th:field="*{performance[0].sets}" />
-
-            <label for="reps">Reps</label>
-            <input type="text" id="reps" th:field="*{performance[0].reps}" />
-
-            <label for="rest">Rest inbetween sets (s)</label>
-            <input type="text" id="rest" th:field="*{performance[0].rest}" /> -->
+            <input type="text" placeholder="Set Title" id="title" th:field="*{title}" required />
 
             <input type="submit" value="Save" />
         </form>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Performance</title>
+</head>
+<body>
+    <form th:object="${performance}" th:action="@{/update-performance}" action="#" method="post">
+        <!-- Hidden field for workout id -->
+        <input type="hidden" th:field="*{workout.id}">
+        <!-- Hidden field for performance id -->
+        <input type="hidden" th:field="*{id}">
+
+            <label for="exercise">Exercise</label>
+        <input type="text" placeholder="Choose Exercise" id="exercise" th:field="*{exercise}" required/>
+            <label for="weights">Weights</label>
+        <input type="text" placeholder="Set Weights in kg" id="weights" th:field="*{weights}" required />
+            <label for="sets">Sets</label>
+        <input type="number" min="0" placeholder="Set Sets" id="sets" th:field="*{sets}" />
+            <label for="reps">Reps</label>
+        <input type="number" min="0" placeholder="Set Reps" id="reps" th:field="*{reps}" />
+            <label for="rest">Rest</label>
+        <input type="number" step="10" min="0" placeholder="Rest Time in seconds" id="rest" th:field="*{rest}"  />
+
+        <input type="submit" value="Save">
+    </form>
+</body>
+</html>
