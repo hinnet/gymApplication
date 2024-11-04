@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Bean;
 
 import hh.sof03.harjoitustyo.domain.Performance;
 import hh.sof03.harjoitustyo.domain.PerformanceRepository;
-import hh.sof03.harjoitustyo.domain.User;
-import hh.sof03.harjoitustyo.domain.UserRepository;
+import hh.sof03.harjoitustyo.domain.AppUser;
+import hh.sof03.harjoitustyo.domain.AppUserRepository;
 import hh.sof03.harjoitustyo.domain.Workout;
 import hh.sof03.harjoitustyo.domain.WorkoutRepository;
 
@@ -26,16 +26,19 @@ public class HarjoitustyoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(UserRepository uRepository, WorkoutRepository wRepository, PerformanceRepository pRepository) {
+	public CommandLineRunner demo(AppUserRepository uRepository, WorkoutRepository wRepository, PerformanceRepository pRepository) {
 		return (args) -> {
-			User user = new User("testUser", "null", null);
 
-			uRepository.save(user);
+			AppUser user1 = new AppUser("user1", "$2a$12$9akGgVN01Th0dXNX5rLSBOGcjklMm2hAojqz3nX6CbnbxPlCgX.BW", "USER", null);
+			AppUser user2 = new AppUser("admin", "$2a$12$xSKSL4wxAVITacS3mKlbiuEarX9XqVEZ.yGWidYtvjE/.AjAapSYi", "ADMIN", null);
 
-			Workout workout1 = new Workout("Upper - Workout 1", user, null);
-			Workout workout2 = new Workout("Lower - Workout 1", user, null);
-			Workout workout3 = new Workout("Upper - Workout 2", user, null);
-			Workout workout4 = new Workout("Lower - Workout 2", user, null);
+			uRepository.save(user1);
+			uRepository.save(user2);
+
+			Workout workout1 = new Workout("Upper - Workout 1", user1, null);
+			Workout workout2 = new Workout("Lower - Workout 1", user1, null);
+			Workout workout3 = new Workout("Upper - Workout 2", user1, null);
+			Workout workout4 = new Workout("Lower - Workout 2", user1, null);
 
 			wRepository.save(workout1);
 			wRepository.save(workout2);

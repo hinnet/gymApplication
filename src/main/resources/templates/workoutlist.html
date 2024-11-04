@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,8 +22,8 @@
             <tbody th:each = "workout : ${workouts}">
                 <tr>
                     <td th:text="${workout.title}" rowspan="${#lists.size(workout.performances) : 1}"></td>
-                    <td><a th:href="@{/edit-workout/{id}(id=${workout.id})}" class="btn btn-alt">Edit</a></td>
-                    <td><a th:href="@{/delete-workout/{id}(id=${workout.id})}" class="btn btn-xs btn-danger">Delete</a></td>
+                    <td sec:authorize="hasRole('USER')"><a th:href="@{/edit-workout/{id}(id=${workout.id})}" class="btn btn-alt">Edit</a></td>
+                    <td sec:authorize="hasRole('USER')"><a th:href="@{/delete-workout/{id}(id=${workout.id})}" class="btn btn-xs btn-danger">Delete</a></td>
                 </tr>
                 <tr th:each="performance : ${workout.performances}">
                     <td></td> <!-- Jotta asettuvat oikein Thymeleafissa -->
@@ -31,8 +32,8 @@
                     <td th:text="${performance.sets}"></td>
                     <td th:text="${performance.reps}"></td>
                     <td th:text="${performance.rest}"></td>
-                    <td><a th:href="@{/edit-performance/{id}(id=${performance.id})}" class="btn btn-alt">Edit</a></td>
-                    <td><a th:href="@{/delete-performance/{id}(id=${performance.id})}" class="btn btn-xs btn-danger">Delete</a></td>
+                    <td sec:authorize="hasRole('USER')"><a th:href="@{/edit-performance/{id}(id=${performance.id})}" class="btn btn-alt">Edit</a></td>
+                    <td sec:authorize="hasRole('USER')"><a th:href="@{/delete-performance/{id}(id=${performance.id})}" class="btn btn-xs btn-danger">Delete</a></td>
                 </tr>
             </tbody>
         </table>
