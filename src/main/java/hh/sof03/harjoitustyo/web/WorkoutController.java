@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import hh.sof03.harjoitustyo.domain.ExerciseRepository;
 import hh.sof03.harjoitustyo.domain.Performance;
 import hh.sof03.harjoitustyo.domain.PerformanceRepository;
 import hh.sof03.harjoitustyo.domain.Workout;
@@ -26,6 +27,9 @@ public class WorkoutController {
 
     @Autowired
     private PerformanceRepository perfRepository;
+
+    @Autowired
+    private ExerciseRepository eRepository;
 
     // Home page
     @RequestMapping("/home")
@@ -75,7 +79,8 @@ public class WorkoutController {
     @GetMapping("/edit-workout/{id}")
     public String editWorkout(@PathVariable("id") Long workoutId, Model model) {
         model.addAttribute("workout", woRepository.findById(workoutId));
-        model.addAttribute("performances", woRepository.findById(workoutId));
+        // model.addAttribute("performances", perfRepository.findByWorkout(workout));
+        model.addAttribute("exercises", eRepository.findAll());
         return "edit-workout";
     }
 

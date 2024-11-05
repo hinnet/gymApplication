@@ -11,9 +11,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
-// import java.util.Date;
+//import java.util.Date;
 import java.util.List;
-// import org.springframework.format.annotation.DateTimeFormat;
+
+//import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Workout {
@@ -21,7 +22,7 @@ public class Workout {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
-    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    //@DateTimeFormat(pattern = "dd.mm.yyyy")
     //private Date date;
     //TODO: Lisää date getterit, setterit...
     // TODO: kesto?
@@ -40,7 +41,6 @@ public class Workout {
     }
 
     public Workout(String title, AppUser user, List<Performance> performances) {
-        super();
         this.title = title;
         this.user = user;
         this.performances = performances;
@@ -76,10 +76,5 @@ public class Workout {
 
     public void setUser(AppUser user) {
         this.user = user;
-    }
-
-    @Override
-    public String toString() {
-        return "Workout [id=" + id + ", title=" + title + ", user=" + user + ", performances=" + performances + "]";
     }
 }

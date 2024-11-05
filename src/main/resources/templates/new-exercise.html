@@ -29,11 +29,9 @@
         </ul>
     </nav>
     <div>
-        <form th:object="${workout}" th:action="@{/save-workout}" action="#" method="post">
-                <label for="title">Workout Title</label>
-            <input type="text" placeholder="Set Title" id="title" th:field="*{title}" required />
-            <!-- <label for="date">Date</label>
-            <input type="date" placeholder="dd.mm.yyyy" id="date" th:field="*{date}" /> -->
+        <form th:object="${exercise}" th:action="@{/save-exercise}" action="#" method="post">
+                <label for="name">Exercise Name</label>
+            <input type="text" placeholder="Set Name" id="name" th:field="*{name}" required />
 
             <input type="submit" value="Save" />
         </form>

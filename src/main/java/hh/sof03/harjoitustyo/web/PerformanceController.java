@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import hh.sof03.harjoitustyo.domain.ExerciseRepository;
 import hh.sof03.harjoitustyo.domain.Performance;
 import hh.sof03.harjoitustyo.domain.PerformanceRepository;
 
 @Controller
 public class PerformanceController {
+
     @Autowired
     private PerformanceRepository repository;
+
+    @Autowired
+    private ExerciseRepository eRepository;
 
     // RESTful service to get all performances
     // Get Java-list of Performance objects, convert to JSON-list and send to web browser
@@ -44,6 +49,7 @@ public class PerformanceController {
     @GetMapping("/edit-performance/{id}")
     public String editPerformance(@PathVariable("id") Long performanceId, Model model) {
         model.addAttribute("performance", repository.findById(performanceId));
+        model.addAttribute("exercises", eRepository.findAll());
         return "edit-performance";
     }
 

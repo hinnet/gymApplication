@@ -7,11 +7,32 @@
     <title>Home Page</title>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li>
+                <button onclick="window.location.href='/home'">Home</button>
+            </li>
+            <li>
+                <button onclick="window.location.href='/workoutlist'">Workouts</button>
+            </li>
+            <li sec:authorize="hasAuthority('ADMIN')">
+              <button onclick="window.location.href='/exerciselist'">Exercises</button>
+            </li>
+            <li sec:authorize="isAnonymous()">
+                <button onclick="window.location.href='/login'" sec:authorize="isAnonymous()">Login</button>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit">Log out</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
     <div>
         <h1>Workout Application</h1>
-        <h3>Welcome <span sec:authentication="username"></span>!</h3>
-        <a href="/workoutlist" class="btn btn-primary">Workouts</a>
-        <a href="/login" class="btn btn-primary">Login</a>
+        <h3 sec:authorize="isAuthenticated()">
+            Welcome <span sec:authentication="name"></span>!
+        </h3>
     </div>
 </body>
 </html>

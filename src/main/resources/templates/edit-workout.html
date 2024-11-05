@@ -7,6 +7,27 @@
     <title>Edit Workout</title>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li>
+                <button onclick="window.location.href='/home'">Home</button>
+            </li>
+            <li>
+                <button onclick="window.location.href='/workoutlist'">Workouts</button>
+            </li>
+            <li sec:authorize="hasAuthority('ADMIN')">
+              <button onclick="window.location.href='/exerciselist'">Exercises</button>
+            </li>
+            <li sec:authorize="isAnonymous()">
+                <button onclick="window.location.href='/login'" sec:authorize="isAnonymous()">Login</button>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit">Log out</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
     <div>
         <form th:object="${workout}" th:action="@{/update-workout}" action="#" method="post">
             <!-- Hidden field for workout id -->
@@ -18,7 +39,64 @@
             <input type="date" placeholder="dd.mm.yyyy" id="date" th:field="*{date}" /> -->
             
             <input type="submit" value="Save">
+
+            <button type="button" onclick="document.getElementById('performance-form').style.display='block'">
+                Add New Performance
+            </button>
         </form>
+
+        <!-- <div>
+            <h3>Exercises</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Exercise</th>
+                        <th>Weights used</th>
+                        <th>Sets</th>
+                        <th>Reps</th>
+                        <th>Rest inbetween sets (s)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="performance : ${workout.performances}">
+                        <td th:text="${performance.exercise.name}"></td>
+                        <td th:text="${performance.weights}"></td>
+                        <td th:text="${performance.sets}"></td>
+                        <td th:text="${performance.reps}"></td>
+                        <td th:text="${performance.rest}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> -->
+
+        <div id="performance-form" style="display:none; margin-top: 20px;">
+            <h3>Add New Performance to Workout</h3>
+            <form th:action="@{/add-performance}" method="post">
+                <!-- Hidden field for workout id -->
+                <input type="hidden" th:value="${id}" />
+
+                <label for="exerciselist">Exercise</label>
+                    <select id="exerciselist" class="form-control" required >
+                        <option value="" disabled selected>Select Exercise</option>
+                        <option th:each="exercise: ${exercises}" th:value="${exercise.id}" th:text="${exercise.name}"></option>
+                    </select>
+                    <div style="clear: both; display: block; height: 10px;"></div>
+                <label for="weights">Weights</label>
+                    <input type="text" placeholder="Set Weights in kg" id="weights" required />
+                    <div style="clear: both; display: block; height: 10px;"></div>
+                <label for="sets">Sets</label>
+                    <input type="text" placeholder="Set Amount of Sets" id="sets" />
+                    <div style="clear: both; display: block; height: 10px;"></div>
+                <label for="reps">Reps</label>
+                    <input type="text" placeholder="Set Amount of Reps" id="reps" />
+                    <div style="clear: both; display: block; height: 10px;"></div>
+                <label for="rest">Rest</label>
+                    <input type="text" placeholder="Rest Time in seconds" id="rest" />
+                    <div style="clear: both; display: block; height: 10px;"></div>
+
+                <input type="submit" value="Save Performance">
+            </form>
+        </div>
     </div>
 </body>
 </html>

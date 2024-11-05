@@ -7,6 +7,27 @@
     <title>Workout List</title>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li>
+                <button onclick="window.location.href='/home'">Home</button>
+            </li>
+            <li>
+                <button onclick="window.location.href='/workoutlist'">Workouts</button>
+            </li>
+            <li sec:authorize="hasAuthority('ADMIN')">
+              <button onclick="window.location.href='/exerciselist'">Exercises</button>
+            </li>
+            <li sec:authorize="isAnonymous()">
+                <button onclick="window.location.href='/login'" sec:authorize="isAnonymous()">Login</button>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit">Log out</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
     <div>
         <table class="table table-striped">
             <thead>
@@ -22,22 +43,24 @@
             <tbody th:each = "workout : ${workouts}">
                 <tr>
                     <td th:text="${workout.title}" rowspan="${#lists.size(workout.performances) : 1}"></td>
-                    <td sec:authorize="hasRole('USER')"><a th:href="@{/edit-workout/{id}(id=${workout.id})}" class="btn btn-alt">Edit</a></td>
-                    <td sec:authorize="hasRole('USER')"><a th:href="@{/delete-workout/{id}(id=${workout.id})}" class="btn btn-xs btn-danger">Delete</a></td>
+                    <td sec:authorize="hasAuthority('USER')"><button><a th:href="@{/edit-workout/{id}(id=${workout.id})}" class="btn btn-alt">Edit</a></button></td>
+                    <td sec:authorize="hasAuthority('USER')"><button><a th:href="@{/delete-workout/{id}(id=${workout.id})}" class="btn btn-xs btn-danger">Delete</a></button></td>
                 </tr>
                 <tr th:each="performance : ${workout.performances}">
                     <td></td> <!-- Jotta asettuvat oikein Thymeleafissa -->
-                    <td th:text="${performance.exercise}"></td>
+                    <td th:text="${performance.exercise.name}"></td>
                     <td th:text="${performance.weights}"></td>
                     <td th:text="${performance.sets}"></td>
                     <td th:text="${performance.reps}"></td>
                     <td th:text="${performance.rest}"></td>
-                    <td sec:authorize="hasRole('USER')"><a th:href="@{/edit-performance/{id}(id=${performance.id})}" class="btn btn-alt">Edit</a></td>
-                    <td sec:authorize="hasRole('USER')"><a th:href="@{/delete-performance/{id}(id=${performance.id})}" class="btn btn-xs btn-danger">Delete</a></td>
+                    <td sec:authorize="hasAuthority('USER')"><button><a th:href="@{/edit-performance/{id}(id=${performance.id})}" class="btn btn-alt">Edit</a></button></td>
+                    <td sec:authorize="hasAuthority('USER')"><button><a th:href="@{/delete-performance/{id}(id=${performance.id})}" class="btn btn-xs btn-danger">Delete</a></button></td>
                 </tr>
             </tbody>
         </table>
-        <a href="/new-workout" class="btn btn-primary">Add new Workout</a>
+        <td sec:authorize="hasAuthority('USER')">
+            <button class="btn btn-primary" onclick="window.location.href='/new-workout'">Add new Workout</button>
+        </td>
     </div>
 </body>
 </html>

@@ -35,12 +35,11 @@ public class AppUser {
     public AppUser() {
     }
 
-    public AppUser(String username, String passwordHash, String role, List<Workout> workouts) {
+    public AppUser(String username, String passwordHash, String role) {
         super();
         this.username = username;
         this.passwordHash = passwordHash;
         this.role = role;
-        this.workouts = workouts;
     }
 
     public Long getId() {
@@ -81,11 +80,5 @@ public class AppUser {
 
     public void setWorkouts(List<Workout> workouts) {
         this.workouts = workouts;
-    }
-
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", username=" + username + ", passwordHash=" + passwordHash + ", role=" + role + ", workouts="
-                + workouts + "]";
     }
 }

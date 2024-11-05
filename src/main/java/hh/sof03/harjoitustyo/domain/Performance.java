@@ -15,11 +15,15 @@ public class Performance {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    private String exercise;
     private double weights;
     private Integer sets;
     private Integer reps;
     private Integer rest;
+
+    @ManyToOne
+    @JsonIgnoreProperties("performances")
+    @JoinColumn(name = "exerciseid")
+    private Exercise exercise;
 
     @ManyToOne
     @JsonIgnoreProperties("performances")
@@ -29,13 +33,13 @@ public class Performance {
     public Performance() {
     }
 
-    public Performance(String exercise, double weights, Integer sets, Integer reps, Integer rest, Workout workout) {
+    public Performance(double weights, Integer sets, Integer reps, Integer rest, Exercise exercise, Workout workout) {
         super();
-        this.exercise = exercise;
         this.weights = weights;
         this.sets = sets;
         this.reps = reps;
         this.rest = rest;
+        this.exercise = exercise;
         this.workout = workout;
     }
 
@@ -45,14 +49,6 @@ public class Performance {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getExercise() {
-        return exercise;
-    }
-
-    public void setExercise(String exercise) {
-        this.exercise = exercise;
     }
 
     public double getWeights() {
@@ -86,6 +82,14 @@ public class Performance {
     public void setRest(Integer rest) {
         this.rest = rest;
     }
+    
+    public Exercise getExercise() {
+        return exercise;
+    }
+
+    public void setExercise(Exercise exercise) {
+        this.exercise = exercise;
+    }
 
     public Workout getWorkout() {
         return workout;
@@ -94,6 +98,4 @@ public class Performance {
     public void setWorkout(Workout workout) {
         this.workout = workout;
     }
-
-    
 }

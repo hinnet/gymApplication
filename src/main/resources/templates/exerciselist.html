@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Workout</title>
+    <title>Home Page</title>
 </head>
 <body>
     <nav>
@@ -29,14 +29,25 @@
         </ul>
     </nav>
     <div>
-        <form th:object="${workout}" th:action="@{/save-workout}" action="#" method="post">
-                <label for="title">Workout Title</label>
-            <input type="text" placeholder="Set Title" id="title" th:field="*{title}" required />
-            <!-- <label for="date">Date</label>
-            <input type="date" placeholder="dd.mm.yyyy" id="date" th:field="*{date}" /> -->
-
-            <input type="submit" value="Save" />
-        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>ExerciseId</th>
+                    <th>Exercise Name</th>
+                </tr>
+            </thead>
+            <tbody th:each="exercise : ${exercises}">
+                <tr>
+                    <td th:text="${exercise.id}"></td>
+                    <td th:text="${exercise.name}"></td>
+                    <td sec:authorize="hasAuthority('ADMIN')"><button><a th:href="@{/edit-exercise/{id}(id=${exercise.id})}" class="btn btn-alt">Edit</a></button></td>
+                    <td sec:authorize="hasAuthority('ADMIN')"><button><a th:href="@{/delete-exercise/{id}(id=${exercise.id})}" class="btn btn-xs btn-danger">Delete</a></button></td>
+                </tr>
+            </tbody>
+        </table>
+        <td sec:authorize="hasAuthority('ADMIN')">
+            <button class="btn btn-primary" onclick="window.location.href='/new-exercise'">Add new Exercise</button>
+        </td>
     </div>
 </body>
 </html>
