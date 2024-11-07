@@ -29,10 +29,15 @@
         </ul>
     </nav>
     <div>
+        <td sec:authorize="hasAuthority('USER')">
+            <button class="btn btn-primary" onclick="window.location.href='/new-workout'">Add new Workout</button>
+        </td>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Workout title</th>
+                    <th>Date</th>
+                    <th>Duration</th>
                     <th>Exercise</th>
                     <th>Weights used</th>
                     <th>Sets</th>
@@ -43,10 +48,14 @@
             <tbody th:each = "workout : ${workouts}">
                 <tr>
                     <td th:text="${workout.title}" rowspan="${#lists.size(workout.performances) : 1}"></td>
+                    <td th:text="${workout.date}"></td>
+                    <td th:text="${workout.date}"></td>
                     <td sec:authorize="hasAuthority('USER')"><button><a th:href="@{/edit-workout/{id}(id=${workout.id})}" class="btn btn-alt">Edit</a></button></td>
                     <td sec:authorize="hasAuthority('USER')"><button><a th:href="@{/delete-workout/{id}(id=${workout.id})}" class="btn btn-xs btn-danger">Delete</a></button></td>
                 </tr>
                 <tr th:each="performance : ${workout.performances}">
+                    <td></td>
+                    <td></td>
                     <td></td> <!-- Jotta asettuvat oikein Thymeleafissa -->
                     <td th:text="${performance.exercise.name}"></td>
                     <td th:text="${performance.weights}"></td>
@@ -56,9 +65,6 @@
                 </tr>
             </tbody>
         </table>
-        <td sec:authorize="hasAuthority('USER')">
-            <button class="btn btn-primary" onclick="window.location.href='/new-workout'">Add new Workout</button>
-        </td>
     </div>
 </body>
 </html>

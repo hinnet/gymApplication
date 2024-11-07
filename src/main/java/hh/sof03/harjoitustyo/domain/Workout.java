@@ -11,20 +11,29 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
-//import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
-//import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String title;
-    //@DateTimeFormat(pattern = "dd.mm.yyyy")
-    //private Date date;
-    //TODO: Lisää date getterit, setterit...
+
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    private LocalDate date;
+
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private LocalTime startTime;
+
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private LocalTime endTime;
+
     // TODO: kesto?
     // TODO: kokonaispainot (workout load)?
 
@@ -39,10 +48,13 @@ public class Workout {
 
     public Workout() {
     }
-
-    public Workout(String title, AppUser user) {
+    
+    public Workout(String title, LocalDate date, LocalTime startTime, LocalTime endTime, AppUser user) {
         super();
         this.title = title;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.user = user;
     }
 
@@ -60,6 +72,30 @@ public class Workout {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 
     public List<Performance> getPerformances() {

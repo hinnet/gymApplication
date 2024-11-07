@@ -35,8 +35,12 @@
 
                 <label for="title">Workout Title</label>
             <input type="text" placeholder="Set Title" id="title" th:field="*{title}" required />
-                <!-- <label for="date">Date</label>
-            <input type="date" placeholder="dd.mm.yyyy" id="date" th:field="*{date}" /> -->
+                <label for="date">Date</label>
+            <input type="date" placeholder="dd.mm.yyyy" id="date" th:field="*{date}">
+                <label for="startTime">Starting Time</label>
+            <input type="time" placeholder="hh:mm:ss" id="startTime" th:field="*{startTime}">
+                <label for="endTime">Finish Time</label>
+            <input type="time" placeholder="hh:mm:ss" id="endTime" th:field="*{endTime}">
             
             <input type="submit" value="Save">
         </form>
