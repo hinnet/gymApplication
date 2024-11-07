@@ -78,8 +78,11 @@ public class WorkoutController {
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/edit-workout/{id}")
     public String editWorkout(@PathVariable("id") Long workoutId, Model model) {
-        model.addAttribute("workout", woRepository.findById(workoutId));
-        // model.addAttribute("performances", perfRepository.findByWorkout(workout));
+        Workout workout = woRepository.findById(workoutId)
+                        .orElseThrow(() -> new IllegalArgumentException("Invalid workout ID: " + workoutId));
+        model.addAttribute("workout", workout);
+        model.addAttribute("performances", perfRepository.findByWorkout(workout));
+        model.addAttribute("performance", new Performance());
         model.addAttribute("exercises", eRepository.findAll());
         return "edit-workout";
     }

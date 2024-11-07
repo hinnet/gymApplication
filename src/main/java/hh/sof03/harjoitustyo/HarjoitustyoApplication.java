@@ -69,10 +69,10 @@ public class HarjoitustyoApplication {
 				log.info(exercise.toString());
 			});
 
-			Workout workout1 = new Workout("Upper - Workout 1", user1, null);
-			Workout workout2 = new Workout("Lower - Workout 1", user1, null);
-			Workout workout3 = new Workout("Upper - Workout 2", user1, null);
-			Workout workout4 = new Workout("Lower - Workout 2", user1, null);
+			Workout workout1 = new Workout("Upper - Workout 1", user1);
+			Workout workout2 = new Workout("Lower - Workout 1", user1);
+			Workout workout3 = new Workout("Upper - Workout 2", user1);
+			Workout workout4 = new Workout("Lower - Workout 2", user1);
 
 			wRepository.save(workout1);
 			wRepository.save(workout2);

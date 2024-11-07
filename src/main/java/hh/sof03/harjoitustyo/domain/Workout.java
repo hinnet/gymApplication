@@ -40,10 +40,10 @@ public class Workout {
     public Workout() {
     }
 
-    public Workout(String title, AppUser user, List<Performance> performances) {
+    public Workout(String title, AppUser user) {
+        super();
         this.title = title;
         this.user = user;
-        this.performances = performances;
     }
 
     public Long getId() {
