@@ -80,15 +80,17 @@ public class PerformanceController {
     @PostMapping("/update-performance")
     public String updatePerformance(Performance performance) {
         repository.save(performance);
-        return "redirect:/workoutlist";
+        return "redirect:/edit-workout/" + performance.getWorkout().getId();
     }
 
     // Delete performance from workout (and database)
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/delete-performance/{id}")
     public String deletePerformance(@PathVariable("id") Long performanceId, Model model) {
+        Performance performance = repository.findById(performanceId).get();
+        Workout workout = performance.getWorkout();
         repository.deleteById(performanceId);
-        return "redirect:/workoutlist";
+        return "redirect:/edit-workout/" + workout.getId();
     }
 
 }

@@ -53,8 +53,6 @@
                     <td th:text="${performance.sets}"></td>
                     <td th:text="${performance.reps}"></td>
                     <td th:text="${performance.rest}"></td>
-                    <td sec:authorize="hasAuthority('USER')"><button><a th:href="@{/edit-performance/{id}(id=${performance.id})}" class="btn btn-alt">Edit</a></button></td>
-                    <td sec:authorize="hasAuthority('USER')"><button><a th:href="@{/delete-performance/{id}(id=${performance.id})}" class="btn btn-xs btn-danger">Delete</a></button></td>
                 </tr>
             </tbody>
         </table>

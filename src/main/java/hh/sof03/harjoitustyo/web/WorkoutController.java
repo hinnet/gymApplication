@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class WorkoutController {
@@ -90,9 +91,10 @@ public class WorkoutController {
     // Update workout
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping("/update-workout")
-    public String updateWorkout(Workout workout) {
+    public String updateWorkout(Workout workout, RedirectAttributes redirectAttributes) {
         woRepository.save(workout);
-        return "redirect:/workoutlist";
+        redirectAttributes.addFlashAttribute("message", "Workout Title saved successfully!");
+        return "redirect:/edit-workout/" + workout.getId();
     }
 
     // Delete workout from database

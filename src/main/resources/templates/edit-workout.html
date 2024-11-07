@@ -31,7 +31,7 @@
     <div>
         <form th:object="${workout}" th:action="@{/update-workout}" action="#" method="post">
             <!-- Hidden field for workout id -->
-            <input type="hidden" th:field="*{id}" />
+            <input type="hidden" name="workoutId" th:field="*{id}" />
 
                 <label for="title">Workout Title</label>
             <input type="text" placeholder="Set Title" id="title" th:field="*{title}" required />
@@ -39,11 +39,12 @@
             <input type="date" placeholder="dd.mm.yyyy" id="date" th:field="*{date}" /> -->
             
             <input type="submit" value="Save">
-
-            <button type="button" onclick="document.getElementById('performance-form').style.display='block'">
-                Add New Performance
-            </button>
         </form>
+
+        <!-- Title saved succesfully flash-message -->
+        <div th:if="${message}" class="flash-message">
+            <p th:text="${message}"></p>
+        </div>
 
         <div>
             <h3>Exercises</h3>
@@ -64,10 +65,16 @@
                         <td th:text="${performance.sets}"></td>
                         <td th:text="${performance.reps}"></td>
                         <td th:text="${performance.rest}"></td>
+                        <td sec:authorize="hasAuthority('USER')"><button><a th:href="@{/delete-performance/{id}(id=${performance.id})}" class="btn btn-xs btn-danger">Delete</a></button></td>
+                        <td sec:authorize="hasAuthority('USER')"><button><a th:href="@{/edit-performance/{id}(id=${performance.id})}" class="btn btn-alt">Edit</a></button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <button type="button" onclick="document.getElementById('performance-form').style.display='block'">
+            Add New Performance
+        </button>
 
         <div id="performance-form" style="display:none; margin-top: 20px;">
             <h3>Add New Performance to Workout</h3>
