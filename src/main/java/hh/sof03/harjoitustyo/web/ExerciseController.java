@@ -1,14 +1,17 @@
 package hh.sof03.harjoitustyo.web;
 
+import hh.sof03.harjoitustyo.domain.Exercise;
+import hh.sof03.harjoitustyo.domain.ExerciseRepository;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
-import hh.sof03.harjoitustyo.domain.Exercise;
-import hh.sof03.harjoitustyo.domain.ExerciseRepository;
-
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -18,6 +21,7 @@ public class ExerciseController {
     @Autowired
     private ExerciseRepository repository;
 
+    // Get exerciselist
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/exerciselist")
     public String exerciseList(Model model) {
@@ -36,9 +40,13 @@ public class ExerciseController {
     // Save new exercise to database
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/save-exercise")
-    public String saveExercise(Exercise exercise) {
-        repository.save(exercise);
-        return "redirect:/exerciselist";
+    public String saveExercise(@Valid @ModelAttribute("exercise") Exercise exercise, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "new-exercise";
+        } else {
+            repository.save(exercise);
+            return "redirect:/exerciselist";
+        }
     }
 
     // Edit exercise

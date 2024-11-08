@@ -1,8 +1,5 @@
 package hh.sof03.harjoitustyo.web;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -17,8 +14,6 @@ import hh.sof03.harjoitustyo.domain.WorkoutRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -33,7 +28,7 @@ public class WorkoutController {
     private ExerciseRepository eRepository;
 
     // Home page
-    @RequestMapping("/home")
+    @GetMapping("/home")
     public String home() {
         return "home";
     }
@@ -43,19 +38,7 @@ public class WorkoutController {
     public String workoutList(Model model) {
         model.addAttribute("workouts", woRepository.findAll());
         return "workoutlist";
-    }
-
-    // RESTful service to get all workouts
-    @GetMapping("/workouts")
-    public List<Workout> getWorkoutsRest() {
-        return (List<Workout>) woRepository.findAll();
-    }
-
-    // RESTful service to get workout by id
-    @RequestMapping(value="/workout/{id}")
-    public @ResponseBody Optional<Workout> findWorkoutRest(@PathVariable("id") Long workoutId) {	
-    	return woRepository.findById(workoutId);
-    }       
+    }    
     
     // Add new workout, returns new-workout form
     @PreAuthorize("hasAuthority('USER')")

@@ -30,9 +30,12 @@
     </nav>
     <div>
         <form th:object="${exercise}" th:action="@{/save-exercise}" action="#" method="post">
-                <label for="name">Exercise Name</label>
-            <input type="text" placeholder="Set Name" id="name" th:field="*{name}" required />
-
+            <table>
+                <tr>
+                    <td>Exercise Name <input type="text" placeholder="Set Name" id="name" th:field="*{name}" /></td>
+                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</td>
+                </tr>
+            </table>
             <input type="submit" value="Save" />
         </form>
     </div>

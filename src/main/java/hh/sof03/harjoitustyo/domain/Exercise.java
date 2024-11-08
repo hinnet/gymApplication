@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Exercise {
@@ -18,6 +19,7 @@ public class Exercise {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Name is required")
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "exercise")

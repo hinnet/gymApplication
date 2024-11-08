@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,9 +23,12 @@ public class AppUser {
     private Long id;
 
     @Column(name = "username", nullable = false, unique = true)
+    @NotNull
     private String username;
 
     @Column(name = "password", nullable = false)
+    @NotNull
+    @Size(min=8, max=200)
     private String passwordHash;
 
     @Column(name = "role", nullable = false)

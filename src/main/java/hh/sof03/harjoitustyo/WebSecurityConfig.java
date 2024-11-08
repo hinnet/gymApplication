@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig {
@@ -21,7 +23,8 @@ public class WebSecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests( authorize -> authorize
-                .requestMatchers("/", "/home", "/workoutlist", "/login").permitAll()
+                .requestMatchers("/", "/home", "/workoutlist", "/login", "/api", "/api/exercises").permitAll()
+                .requestMatchers(antMatcher("/api/**/user/**"), antMatcher("/api/**/appUsers/**")).hasAuthority("ADMIN")
                 .anyRequest().authenticated()
             )
             .formLogin( formlogin -> formlogin
