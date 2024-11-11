@@ -5,6 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Workout</title>
+    <script>
+        function validateTimes() {
+            const startTimeInput = document.getElementById("startTime");
+            const endTimeInput = document.getElementById("endTime");
+            
+            const startTime = new Date(startTimeInput.value);
+            const endTime = new Date(endTimeInput.value);
+
+            if (startTime && endTime && startTime >= endTime) {
+                alert("Starting Time must be before Finish Time.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
     <nav>
@@ -29,18 +44,18 @@
         </ul>
     </nav>
     <div>
-        <form th:object="${workout}" th:action="@{/update-workout}" action="#" method="post">
+        <form th:object="${workout}" th:action="@{/update-workout}" action="#" method="post" onsubmit="return validateTimes()">
             <!-- Hidden field for workout id -->
             <input type="hidden" name="workoutId" th:field="*{id}" />
 
-                <label for="title">Workout Title</label>
+            <label for="title">Workout Title</label>
             <input type="text" placeholder="Set Title" id="title" th:field="*{title}" required />
-                <label for="date">Date</label>
-            <input type="date" placeholder="dd.mm.yyyy" id="date" th:field="*{date}">
-                <label for="startTime">Starting Time</label>
-            <input type="time" placeholder="hh:mm:ss" id="startTime" th:field="*{startTime}">
-                <label for="endTime">Finish Time</label>
-            <input type="time" placeholder="hh:mm:ss" id="endTime" th:field="*{endTime}">
+
+            <label for="startTime">Starting Time</label>
+            <input type="datetime-local" th:field="*{startTime}">
+
+            <label for="endTime">Finish Time</label>
+            <input type="datetime-local" th:field="*{endTime}">
             
             <input type="submit" value="Save">
         </form>

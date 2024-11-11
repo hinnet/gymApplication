@@ -11,8 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,17 +24,14 @@ public class Workout {
 
     private String title;
 
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
-    private LocalDate date;
+    // 'T' erottaa pvm ja kloajan, jotta datetime-local saadaan toimimaan oikein Thymeleafissa
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime startTime;
 
-    @DateTimeFormat(pattern = "HH:mm:ss")
-    private LocalTime startTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime endTime;
 
-    @DateTimeFormat(pattern = "HH:mm:ss")
-    private LocalTime endTime;
-
-    // TODO: kesto?
-    // TODO: kokonaispainot (workout load)?
+    private String duration;
 
     @ManyToOne
     @JsonIgnoreProperties("workouts")
@@ -48,11 +44,10 @@ public class Workout {
 
     public Workout() {
     }
-    
-    public Workout(String title, LocalDate date, LocalTime startTime, LocalTime endTime, AppUser user) {
+
+    public Workout(String title, LocalDateTime startTime, LocalDateTime endTime, AppUser user) {
         super();
         this.title = title;
-        this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.user = user;
@@ -74,30 +69,30 @@ public class Workout {
         this.title = title;
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public LocalTime getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public LocalTime getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+    
     public List<Performance> getPerformances() {
         return performances;
     }

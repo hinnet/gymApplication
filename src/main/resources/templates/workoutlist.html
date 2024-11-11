@@ -35,21 +35,27 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Workout title</th>
+                    <th>Workout Title</th>
                     <th>Date</th>
                     <th>Duration</th>
                     <th>Exercise</th>
-                    <th>Weights used</th>
+                    <th>Weights used (kg)</th>
                     <th>Sets</th>
                     <th>Reps</th>
-                    <th>Rest inbetween sets (s)</th>
+                    <th>Rest in-between Sets (s)</th>
                 </tr>
             </thead>
             <tbody th:each = "workout : ${workouts}">
                 <tr>
-                    <td th:text="${workout.title}" rowspan="${#lists.size(workout.performances) : 1}"></td>
-                    <td th:text="${workout.date}"></td>
-                    <td th:text="${workout.date}"></td>
+                    <td th:text="${workout.title}" rowspan="${#lists.size(workout.performances)}"></td>
+                    <td th:text="${#temporals.format(workout.startTime, 'dd.MM.yyyy')}"></td>
+                    <td th:text="${workout.duration}"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td sec:authorize="hasAuthority('USER')"><button><a th:href="@{/edit-workout/{id}(id=${workout.id})}" class="btn btn-alt">Edit</a></button></td>
                     <td sec:authorize="hasAuthority('USER')"><button><a th:href="@{/delete-workout/{id}(id=${workout.id})}" class="btn btn-xs btn-danger">Delete</a></button></td>
                 </tr>

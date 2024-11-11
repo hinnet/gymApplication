@@ -27,6 +27,9 @@ public class WorkoutController {
     @Autowired
     private ExerciseRepository eRepository;
 
+    @Autowired
+    private DurationService durationService;
+
     // Home page
     @GetMapping("/home")
     public String home() {
@@ -36,6 +39,13 @@ public class WorkoutController {
     // Request list of all workouts and return html to web browser
     @GetMapping("/workoutlist")
     public String workoutList(Model model) {
+        Iterable<Workout> workouts = woRepository.findAll();
+        // Lasketaan kaikille workouteille kesto (duration)
+        for (Workout workout : workouts) {
+            String duration = durationService.calculateDurationOfWorkout(workout.getStartTime(), workout.getEndTime());
+            workout.setDuration(duration);
+        }
+
         model.addAttribute("workouts", woRepository.findAll());
         return "workoutlist";
     }    
@@ -76,7 +86,7 @@ public class WorkoutController {
     @PostMapping("/update-workout")
     public String updateWorkout(Workout workout, RedirectAttributes redirectAttributes) {
         woRepository.save(workout);
-        redirectAttributes.addFlashAttribute("message", "Workout Title saved successfully!");
+        redirectAttributes.addFlashAttribute("message", "Workout saved successfully!");
         return "redirect:/edit-workout/" + workout.getId();
     }
 

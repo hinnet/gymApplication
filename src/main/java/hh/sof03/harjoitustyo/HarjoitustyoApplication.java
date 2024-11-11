@@ -1,6 +1,7 @@
 package hh.sof03.harjoitustyo;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
@@ -71,10 +72,10 @@ public class HarjoitustyoApplication {
 				log.info(exercise.toString());
 			});
 
-			Workout workout1 = new Workout("Upper - Workout 1", LocalDate.of(2024, 11, 7), LocalTime.of(9, 10), LocalTime.of(10, 30), user1);
-			Workout workout2 = new Workout("Lower - Workout 1", LocalDate.of(2024, 11, 7), LocalTime.of(11, 55), LocalTime.of(13, 15), user1);
-			Workout workout3 = new Workout("Upper - Workout 2", LocalDate.of(2024, 11, 7), LocalTime.of(18, 00), LocalTime.of(19, 20), user1);
-			Workout workout4 = new Workout("Lower - Workout 2", LocalDate.of(2024, 11, 7), LocalTime.of(6, 30), LocalTime.of(7, 30), user1);
+			Workout workout1 = new Workout("Upper - Workout 1", LocalDateTime.of(2024, 11, 7, 23, 51), LocalDateTime.of(2024, 11, 8, 1, 16), user1);
+			Workout workout2 = new Workout("Lower - Workout 1", LocalDateTime.of(2024, 11, 8, 15, 00), LocalDateTime.of(2024, 11, 8, 16, 30), user1);
+			Workout workout3 = new Workout("Upper - Workout 2", LocalDateTime.of(2024, 11, 10, 23, 30), LocalDateTime.of(2024, 11, 11, 00, 30), user1);
+			Workout workout4 = new Workout("Lower - Workout 2", LocalDateTime.of(2024, 11, 11, 7, 30), LocalDateTime.of(2024, 11, 11, 8, 30), user1);
 
 			wRepository.save(workout1);
 			wRepository.save(workout2);
