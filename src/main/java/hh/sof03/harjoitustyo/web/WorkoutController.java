@@ -39,12 +39,12 @@ public class WorkoutController {
     // Request list of all workouts and return html to web browser
     @GetMapping("/workoutlist")
     public String workoutList(Model model) {
-        Iterable<Workout> workouts = woRepository.findAll();
-        // Lasketaan kaikille workouteille kesto (duration)
-        for (Workout workout : workouts) {
-            String duration = durationService.calculateDurationOfWorkout(workout.getStartTime(), workout.getEndTime());
-            workout.setDuration(duration);
-        }
+        //Iterable<Workout> workouts = woRepository.findAll();
+        // // // Lasketaan kaikille workouteille kesto (duration)
+        // // for (Workout workout : workouts) {
+        // //     String duration = durationService.calculateDurationOfWorkout(workout.getStartTime(), workout.getEndTime());
+        // //     workout.setDuration(duration);
+        // // }
 
         model.addAttribute("workouts", woRepository.findAll());
         return "workoutlist";

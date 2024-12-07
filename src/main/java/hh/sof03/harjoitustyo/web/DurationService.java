@@ -18,7 +18,7 @@ public class DurationService {
         long hours = duration.toHours();
         long minutes = duration.toMinutes() % 60;
 
-        // Palautetaan kesto muodossa hh:mm:ss (%d = korvattava paikkamerkki, 02 = varmistaa, että numero on kaksilukuinen esim. 00, 11, 05 jne)
+        // Palautetaan kesto muodossa hh:mm (%d = korvattava paikkamerkki, 02 = varmistaa, että numero on kaksilukuinen esim. 00, 11, 05 jne)
         return String.format("%02d:%02d" + " Hours", hours, minutes);
     }
 }

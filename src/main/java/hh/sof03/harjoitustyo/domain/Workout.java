@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class Workout {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime endTime;
 
-    private String duration;
+    //private String duration;
 
     @ManyToOne
     @JsonIgnoreProperties("workouts")
@@ -86,12 +87,22 @@ public class Workout {
     }
 
     public String getDuration() {
-        return duration;
+        if (startTime == null || endTime == null) {
+            return "";
+        }
+
+        Duration duration = Duration.between(startTime, endTime);
+
+        long hours = duration.toHours();
+        long minutes = duration.toMinutes() % 60;
+
+        // Palautetaan kesto muodossa hh:mm (%d = korvattava paikkamerkki, 02 = varmistaa, että numero on kaksilukuinen esim. 00, 11, 05 jne)
+        return String.format("%02d:%02d" + " Hours", hours, minutes);
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
+    // public void setDuration(String duration) {
+    //     this.duration = duration;
+    // }
     
     public List<Performance> getPerformances() {
         return performances;
